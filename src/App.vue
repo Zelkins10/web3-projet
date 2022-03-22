@@ -1,17 +1,22 @@
 <template>
+
+<!-- à retirer -->
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <p> Welcome to this Star Wars data website!<p/>
+    <charactersGallery/>
   </div>
+
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import charactersGallery from './components/CharactersGallery.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    charactersGallery
   }
 }
 </script>
