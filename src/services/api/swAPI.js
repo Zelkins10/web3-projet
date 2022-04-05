@@ -1,5 +1,5 @@
 const getSWData = async function() {
-    const response = await fetch("https://swapi-deno.azurewebsites.net/api/people") // ancienne API qui semble être down : https://swapi.dev/api
+    const response = await fetch("https://swapi-deno.azurewebsites.net/api") // ancienne API qui semble être down : https://swapi.dev/api
     if(response.status == 200){
         return response.json()
     }

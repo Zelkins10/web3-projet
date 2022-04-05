@@ -9,6 +9,8 @@
 
 <script>
 
+
+
 export default {
   name: 'characterCard',
 	props: {

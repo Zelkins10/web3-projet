@@ -11,7 +11,7 @@
 			<characterCard 
 				v-for="character in swCharacterData"
 				:key="character.name" 
-				:name="character.name" 
+				:name="character.name"
 				:species="character.species"/>
 	</div>
 </template>
@@ -23,11 +23,6 @@ import characterCard from '@/components/CharacterCard.vue'
 
 export default {
 	name: 'charactersGallery',
-//   name: 'characterCard',
-// 	props: {
-// 		name: {type: String, required: true},
-// 		species: String
-//   },
   
   data(){
     return{

@@ -2,7 +2,9 @@
 
 <!-- à retirer -->
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <img alt="Star Wars logo" src="./assets/Star-Wars-Logo.png"
+    width= 25%
+    height= auto>
     <p> Welcome to this Star Wars data website!<p/>
     <charactersGallery/>
   </div>
