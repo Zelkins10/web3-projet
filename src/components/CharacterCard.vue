@@ -3,6 +3,7 @@
     <div>
       <h2 class="name">{{name}}</h2>
       <p class="species">{{species}}</p>
+      <p class="birthYear">born in {{birthYear}}</p>
     </div>  
   </div>
 </template>
@@ -15,10 +16,11 @@ export default {
   name: 'characterCard',
 	props: {
 		name: {type: String, required: true},
-		species: Array
+    species: String,
+    birthYear: String,
   },
   created: function() {
-    console.log('je suis créé')
+    //console.log('je suis créé')
   }
 }
 </script>

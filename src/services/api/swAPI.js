@@ -12,7 +12,7 @@ const getSWData = async function() {
 */
 
 // Characters
-const getSWCharacterData = async function() {
+export const getSWCharacterData = async function() {
     const response = await fetch("https://swapi-deno.azurewebsites.net/api/people")
     if(response.status == 200){
         return response.json()
@@ -23,7 +23,7 @@ const getSWCharacterData = async function() {
 }
 
 // Species
-const getSWSpeciesData = async function() {
+export const getSWSpeciesData = async function() {
     const response = await fetch("https://swapi-deno.azurewebsites.net/api/species")
     if(response.status == 200){
         return response.json()
@@ -33,6 +33,6 @@ const getSWSpeciesData = async function() {
     }
 }
 
-export default getSWCharacterData; getSWSpeciesData  // avant : export { getSWData }
+//export {getSWCharacterData, getSWSpeciesData}  // avant : export { getSWData }
 
 // @ dans chemin dans swAPI équivaut à mettre le dossier src
