@@ -1,12 +1,22 @@
 <template>
 	<div class="characters-gallery">
+		<div class="gallery-options">
+				<input type="text" v-model="search" placeholder="Chercher un personnage">
+				<label for="character-sort"> Sort by: </label>
+				<select v-model="dogsSortType" id="dog-sort">
+					<option value="AZName">Noms de A à Z</option>
+					<option value="ZAName">Noms de Z à A</option>
+					<option value="AZBreed">Espèces de A à Z</option>
+					<option value="ZABreed">Espèces de Z à A</option>
+				</select>
 			<characterCard 
-				v-for="character in improvedCharac"
+				v-for="character in sortCharacters"
 				:key="character.name" 
 				:name="character.name"
 				:species="character.species"
 				:birthYear="character.birth_year"
 				/>
+		</div>
 	</div>
 </template>
 
@@ -25,12 +35,23 @@ export default {
 			swCharacterData: [],
 			swSpeciesData: [],
 			improvedCharac: [],
+			search: "",
+			charactersSortType: "AZName",
+			searchedCharacs: [],
 		}
   },
 
-	created: function() {
-		this.retrieveSWData()
+	computed: {
+		sortCharacters: function() {
+			return this.improvedCharac.filter(searchCharacter => {
+				return searchCharacter.name.toLowerCase().includes(this.search.toLowerCase())
+			})
+		}
 	},
+
+		created: function() {
+			this.retrieveSWData()
+		},
 
 	methods: {
 			async retrieveSWData(){
@@ -55,6 +76,16 @@ export default {
 				}
 				return newCharac;
 			},
+
+			async searchCharacter(search){
+				let searchedCharacs = [];
+				for(let i=0; i<this.improvedCharac.length; i++){
+					if(this.improvedCharac[i].name.search(search) != -1){
+						searchedCharacs.push(this.improvedCharac[i])
+					}
+				}
+				return searchedCharacs
+			}
 	},
 	components: {
 		characterCard
