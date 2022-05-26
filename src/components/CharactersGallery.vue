@@ -1,14 +1,20 @@
 <template>
 	<div class="characters-gallery">
 		<div class="gallery-options">
-				<input type="text" v-model="search" placeholder="Chercher un personnage">
+
+				<!-- search -->
+				<input type="text" v-model="search" placeholder="Search for a character">
+				<button v-show="search != ''" v-on:click="clearSearch()">×</button>
+
+				<!-- sort -->
 				<label for="character-sort"> Sort by: </label>
 				<select v-model="charactersSortType" id="charac-sort">
-					<option value="AZName">Noms de A à Z</option>
-					<option value="ZAName">Noms de Z à A</option>
-					<option value="AZSpecies">Espèces de A à Z</option>
-					<option value="ZASpecies">Espèces de Z à A</option>
+					<option value="AZName">Name (A - Z)</option>
+					<option value="ZAName">Name (Z - A)</option>
+					<option value="AZSpecies">Species (A - Z)</option>
+					<option value="ZASpecies">Species (Z - A)</option>
 				</select>
+
 			<characterCard 
 				v-for="character in sortCharacters"
 				:key="character.name" 
@@ -16,6 +22,7 @@
 				:species="character.species"
 				:birthYear="character.birth_year"
 				/>
+
 		</div>
 	</div>
 </template>
@@ -56,38 +63,42 @@ export default {
 		},
 
 	methods: {
-			async retrieveSWData(){
-				this.swCharacterData = await getSWCharacterData()
-				this.swSpeciesData = await getSWSpeciesData()
+		async retrieveSWData(){
+			this.swCharacterData = await getSWCharacterData()
+			this.swSpeciesData = await getSWSpeciesData()
 
-				let charac = await getSWCharacterData();
-				let spec = await getSWSpeciesData();
-				
-				this.improvedCharac = this.enrichCharactersWithSpecies(await charac, await spec);
-			},
+			let charac = await getSWCharacterData();
+			let spec = await getSWSpeciesData();
+			
+			this.improvedCharac = this.enrichCharactersWithSpecies(await charac, await spec);
+		},
 
-			enrichCharactersWithSpecies(charac, spec){
-				let newCharac = [ ...charac];
-				for(let i=0; i<newCharac.length; i++){
-					if(newCharac[i].species.length == 0){
-						newCharac[i].species = spec[0].name;
-					}
-					else{
-						newCharac[i].species = spec[newCharac[i].species[0] - 1].name; // vrai indice de Spec : newCharac[i].url - 1
-					}
+		enrichCharactersWithSpecies(charac, spec){
+			let newCharac = [ ...charac];
+			for(let i=0; i<newCharac.length; i++){
+				if(newCharac[i].species.length == 0){
+					newCharac[i].species = spec[0].name;
 				}
-				return newCharac;
-			},
-
-			async searchCharacter(search){
-				let searchedCharacs = [];
-				for(let i=0; i<this.improvedCharac.length; i++){
-					if(this.improvedCharac[i].name.search(search) != -1){
-						searchedCharacs.push(this.improvedCharac[i])
-					}
+				else{
+					newCharac[i].species = spec[newCharac[i].species[0] - 1].name; // vrai indice de Spec : newCharac[i].url - 1
 				}
-				return searchedCharacs
 			}
+			return newCharac;
+		},
+
+		async searchCharacter(search){
+			let searchedCharacs = [];
+			for(let i=0; i<this.improvedCharac.length; i++){
+				if(this.improvedCharac[i].name.search(search) != -1){
+					searchedCharacs.push(this.improvedCharac[i])
+				}
+			}
+			return searchedCharacs
+		},
+
+		clearSearch(){
+			this.search = ""
+		},
 	},
 	components: {
 		characterCard
