@@ -1,4 +1,4 @@
-# web3-project
+# Web project: Star Wars Database
 
 ## Project setup
 ```

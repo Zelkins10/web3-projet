@@ -3,11 +3,11 @@
 		<div class="gallery-options">
 				<input type="text" v-model="search" placeholder="Chercher un personnage">
 				<label for="character-sort"> Sort by: </label>
-				<select v-model="dogsSortType" id="dog-sort">
+				<select v-model="charactersSortType" id="charac-sort">
 					<option value="AZName">Noms de A à Z</option>
 					<option value="ZAName">Noms de Z à A</option>
-					<option value="AZBreed">Espèces de A à Z</option>
-					<option value="ZABreed">Espèces de Z à A</option>
+					<option value="AZSpecies">Espèces de A à Z</option>
+					<option value="ZASpecies">Espèces de Z à A</option>
 				</select>
 			<characterCard 
 				v-for="character in sortCharacters"
@@ -36,20 +36,22 @@ export default {
 			swSpeciesData: [],
 			improvedCharac: [],
 			search: "",
-			charactersSortType: "AZName",
+			charactersSortType: "AZName", // ou mettre l'id via l'attribut "url"
 			searchedCharacs: [],
 		}
   },
 
 	computed: {
-		sortCharacters: function() {
-			return this.improvedCharac.filter(searchCharacter => {
-				return searchCharacter.name.toLowerCase().includes(this.search.toLowerCase())
-			})
+		sortCharacters: function(){
+			const field = ["AZName", "ZAName"].includes(this.charactersSortType) ? "name" : "species";
+			const reversed = ["ZAName", "ZASpecies"].includes(this.charactersSortType) ? -1 : 1;
+			const comparator = (a, b) => a[field].localeCompare(b[field]) * reversed
+
+			return this.improvedCharac.filter((a) => a.name.toLowerCase().includes(this.search.toLowerCase())).sort(comparator)
 		}
 	},
 
-		created: function() {
+		created: function(){
 			this.retrieveSWData()
 		},
 
