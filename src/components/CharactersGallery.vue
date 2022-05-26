@@ -4,7 +4,7 @@
 
 				<!-- search -->
 				<input type="text" v-model="search" placeholder="Search for a character">
-				<button v-show="search != ''" v-on:click="clearSearch()">×</button>
+				<button v-show="search != ''" v-on:click= "clearSearch()">×</button>
 
 				<!-- sort -->
 				<label for="character-sort"> Sort by: </label>
@@ -80,7 +80,7 @@ export default {
 					newCharac[i].species = spec[0].name;
 				}
 				else{
-					newCharac[i].species = spec[newCharac[i].species[0] - 1].name; // vrai indice de Spec : newCharac[i].url - 1
+					newCharac[i].species = spec[newCharac[i].species[0] - 1].name;
 				}
 			}
 			return newCharac;
@@ -98,7 +98,7 @@ export default {
 
 		clearSearch(){
 			this.search = ""
-		},
+		}
 	},
 	components: {
 		characterCard

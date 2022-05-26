@@ -20,7 +20,15 @@ export default {
     birthYear: String,
   },
   created: function() {
-    //console.log('je suis créé')
   }
 }
 </script>
+
+<style>
+  .character-card:hover {
+    color: rgb(255, 233, 25);
+  }
+
+
+</style>
+

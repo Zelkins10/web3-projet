@@ -1,35 +1,42 @@
 <template>
 
-<!-- à retirer -->
   <div id="app">
-    <img alt="Star Wars logo" src="./assets/Star-Wars-Logo.png"
-    width= 25%
-    height= auto>
-    <p> Welcome to this Star Wars data website!<p/>
+    <SWHeader/>
+    <p>Welcome to this Star Wars data website!</p>
     <charactersGallery/>
+    <SWFooter/>
   </div>
-
 
 </template>
 
 <script>
+import SWHeader from './components/Header.vue'
 import charactersGallery from './components/CharactersGallery.vue'
+import SWFooter from './components/Footer.vue'
 
 export default {
   name: 'App',
   components: {
-    charactersGallery
+    SWHeader,
+    charactersGallery,
+    SWFooter
   }
 }
 </script>
 
 <style>
 #app {
+  background-color: rgb(26, 27, 26);
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: rgb(191, 201, 205);
+  padding-top: 60px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }
 </style>
